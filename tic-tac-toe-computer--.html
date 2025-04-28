@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<!-- saved from url=(0032)http://127.0.0.1:5500/index.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>*{
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+    body{
+        background: rgb(228, 225, 225);
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position:relative;
+    }
+    .container{
+        margin-top: 2.5rem;
+        border-radius: 15px;
+        height: 70vh;
+        width: 500px;
+        box-shadow: 1px 1px 20px 10px rgba(0, 0, 0, 0.329);
+        display: grid;
+        grid-template-columns: repeat(3,1fr); 
+        grid-template-rows: repeat(3,1fr); 
+        grid-gap: 15px;
+        padding:15px;
+        background: rgb(163, 101, 53);
+    }
+    .box{
+        border-radius: 5px;
+        background: rgb(216, 211, 211);
+        cursor: pointer;
+        position:relative;
+    }
+    .box .head{
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        font-size: 7rem;
+        font-family: Arial;
+        text-align: center;
+        color:rgb(163, 101, 53);
+    }
+    .box p{
+        opacity: 0;
+    }
+    body>h1{
+        border:7px solid rgb(216, 172, 84);
+        background: rgb(216, 172, 84);
+        position:absolute;
+        height: 390px;
+        border-radius: 12px;
+        display: none;
+    }
+    .d1{
+        transform-origin:100% 55%;
+        transform: rotate(-50deg);
+        height: 500px;
+    }
+    .d2{
+        transform-origin:100% 55%;
+        transform: rotate(47deg);
+        height: 500px;
+    }
+    .c1{
+        transform: translateX(-160px) translateY(5%);
+    }
+    .c2{
+        transform:translateY(5%);
+    }
+    .c3{
+        transform: translateX(160px) translateY(5%);
+    }
+    .r{
+        height: 0px;
+        width:400px;
+    }
+    .r1{
+        transform: translateY(-120px);
+    }
+    .r2{
+        transform: translateY(20px);
+    }
+    .r3{
+        transform: translateY(160px);
+    }
+    .result{
+        height:100vh;
+        width: 100vw;
+        position: absolute;
+        background: rgba(0, 0, 0, 0.438);
+        display: none;
+    }
+    .result .winner{
+        text-align: center;
+        height: 200px;
+        width: 400px;
+        color:rgb(163, 113, 14);
+        text-shadow: 2px 1px 5px rgba(0, 0, 0, 0.5);
+        font-family: arial;
+        background: rgb(216, 208, 198);
+        border-radius: 15px;
+        margin:auto;
+        box-shadow: 1px 1px 10px 10px rgba(0, 0, 0, 0.452);
+        transform:translateY(-10%)
+    }
+    .result1{
+        display: block;
+    }
+    .winner>h1{
+        margin-top:2rem;
+    }
+    .result button{
+        margin:2rem;
+        height: 50px;
+        width: 70px;
+        border-radius: 10px;
+        outline:none;
+        border:none;
+        font-family: arial;
+        font-weight: bolder;
+        font-size: 1.4rem;
+        border:3px solid rgb(163, 101, 53);
+        color:rgb(163, 101, 53);
+    }
+    .result button:hover{
+        background: rgb(163, 113, 14);
+        color: rgb(216, 208, 198);
+        border:none;
+        cursor:pointer;
+        box-shadow: 1px 1px 10px 2px rgba(0, 0, 0, 0.356);
+    }
+    @media screen and (max-width:420px){
+        .container{
+            grid-gap: 10px;
+            padding: 10px;
+        }
+        body>h1{
+            border-width: 4px;
+        }
+        .d1,.d2{
+            height: 400px;
+        }
+        .c1,.c2,.c3{
+            height: 300px;
+        }
+        .c1{
+            transform: translate(-115px,14px);
+        }
+        .c3{
+            transform:translate(115px,14px);
+        }
+        .r{
+            width: 300px;
+        }
+        .r1{
+            transform: translateY(-100px);
+        }
+        .r3{
+            transform: translateY(130px);
+        }
+        .result .winner{
+            width: 300px;
+        }
+        .winner>h1{
+            font-size: 1.5rem;
+    
+        }
+        .result button{
+            height: 40px;
+            bottom:10px;
+        }
+    }</style>
+    <title>tic-tac-toe</title>
+</head>
+<body>
+    <div class="container"> 
+        <div class="box1 box" id="box1"><p>1</p></div>
+        <div class="box2 box" id="box2"><p>2</p></div>
+        <div class="box3 box" id="box3"><p>3</p></div>
+        <div class="box4 box" id="box4"><p>4</p></div>
+        <div class="box5 box" id="box5"><p>5</p></div>
+        <div class="box6 box" id="box6"><p>6</p></div>
+        <div class="box7 box" id="box7"><p>7</p></div>
+        <div class="box8 box" id="box8"><p>8</p></div>
+        <div class="box9 box" id="box9"><p>9</p></div>
+    </div>
+    <h1 class="d1"></h1>
+    <h1 class="d2"></h1>
+    <h1 class="r1 r"></h1>
+    <h1 class="r2 r"></h1>
+    <h1 class="r3 r"></h1>
+    <h1 class="c1"></h1>
+    <h1 class="c2"></h1>
+    <h1 class="c3"></h1>
+    <div class="result">
+        <div class="winner">
+            <h1 class="announce"></h1>
+            <h2> Do You want to continue ??? </h2>
+            
+            <button class="again" id="again">Yes</button>
+            <button class="exit">No</button>
+
+        </div>
+    </div>
+    <script>const box1 = document.querySelector(".box1");
+        const box2 = document.querySelector(".box2");
+        const box3 = document.querySelector(".box3");
+        const box4 = document.querySelector(".box4");
+        const box5 = document.querySelector(".box5");
+        const box6 = document.querySelector(".box6");
+        const box7 = document.querySelector(".box7");
+        const box8 = document.querySelector(".box8");
+        const box9 = document.querySelector(".box9");
+        const dai1 = document.querySelector(".d1");
+        const dai2 = document.querySelector(".d2");
+        const row1 = document.querySelector(".r1");
+        const row2 = document.querySelector(".r2");
+        const row3 = document.querySelector(".r3");
+        const col1 = document.querySelector(".c1");
+        const col2 = document.querySelector(".c2");
+        const col3 = document.querySelector(".c3");
+        const okBtn = document.querySelector(".again");
+        const noBtn = document.querySelector(".exit");
+        const winner = document.querySelector(".announce");
+        const result = document.querySelector(".result");
+        // console.log(result)
+        let winnerX = `&#128525; X is The Winner &#128525; `;
+        let winnerY = `&#128525; Computer is The Winner &#128525; `;
+        let winnerNo = `&#128520; No One Wins !!! &#128520; `;
+        let arr = [
+            [null,null,null],[null,null,null],[null,null,null]
+        ];
+        let tempArr;
+        
+        let alpha = 1;
+        let count = 0;
+        let clicked = (e) => {
+            const text1 = `<h1 class="head">X</h1>`;
+            const text2 = `<h1 class="head">O</h1>`;
+            let check = e.target.innerText;
+            if (check == 1) {
+                if(arr[0][0] == null){
+                    count++;
+                    arr[0][0] = parseInt(alpha);    
+                    if (alpha == 1) {            
+                        alpha = 5;
+                        box1.innerHTML = text1;
+                    }else {            
+                        alpha = 1           
+                    }
+                }
+            }else if(check==2) {
+                if(arr[0][1] == null){
+                    count++;
+                    arr[0][1] = parseInt(alpha);        
+                    if (alpha == 1) {            
+                        alpha = 5;
+                        box2.innerHTML = text1;
+                    }else {            
+                        alpha = 1;
+                    }
+                }
+            }else if(check==3) {
+                if(arr[0][2] == null){
+                    count++;
+                    arr[0][2] = parseInt(alpha);        
+                    if (alpha == 1) {            
+                        alpha = 5;
+                        box3.innerHTML = text1;
+                    }else {            
+                        alpha = 1;
+                    }
+                }
+            }else if(check==4) {
+                if(arr[1][0] == null){
+                    count++;
+                    arr[1][0] = parseInt(alpha);        
+                    if (alpha == 1) {            
+                        alpha = 5;
+                        box4.innerHTML = text1;
+                    }else {            
+                        alpha = 1;
+                    }
+                }
+            }else if(check==5) {
+                if(arr[1][1] == null){
+                    count++;
+                    arr[1][1] = parseInt(alpha);        
+                    if (alpha == 1) {            
+                        alpha = 5;
+                        box5.innerHTML = text1;
+                    }else {            
+                        alpha = 1;
+                    }
+                }
+            }else if(check==6) {
+                if(arr[1][2] == null){
+                    count++;
+                    arr[1][2] = parseInt(alpha);        
+                    if (alpha == 1) {            
+                        alpha = 5;
+                        box6.innerHTML = text1;
+                    }else {            
+                        alpha = 1;
+                    }
+                }
+            }else if(check==7) {
+                if(arr[2][0] == null){
+                    count++;
+                    arr[2][0] = parseInt(alpha);        
+                    if (alpha == 1) {            
+                        alpha = 5;
+                        box7.innerHTML = text1;
+                    }else {            
+                        alpha = 1;
+                    }
+                }
+            }else if(check==8) {
+                if(arr[2][1] == null){
+                    count++;
+                    arr[2][1] = parseInt(alpha);        
+                    if (alpha == 1) {            
+                        alpha = 5;
+                        box8.innerHTML = text1;
+                    }else {            
+                        alpha = 1;
+                    }
+                }
+            }else if(check==9) {
+                if(arr[2][2] == null){
+                    count++;
+                    arr[2][2] = parseInt(alpha);        
+                    if (alpha == 1) {            
+                        alpha = 5;
+                        box9.innerHTML = text1;
+                    }else {            
+                        alpha = 1;
+                    }
+                }
+            } 
+            if(count < 8){    
+                setTimeout(()=>{
+                    let i=0;
+                    while(i<1){
+                        let indexI = Math.floor(Math.random()*3);
+                        let indexJ = Math.floor(Math.random()*3);
+                        console.log(indexI,indexJ);
+                        if( arr[indexI][indexJ] == null){
+                            arr[indexI][indexJ] = alpha;
+                            if(alpha == 1){
+                                alpha = 5;
+                            }else{
+                                alpha = 1;
+                            }
+                            i++;
+                            count++;
+                            if( indexI == 0 && indexJ == 0)
+                                box1.innerHTML=text2;
+                            else if( indexI == 0 && indexJ == 1)
+                                box2.innerHTML=text2;
+                            else if( indexI == 0 && indexJ == 2)
+                                box3.innerHTML=text2;
+                            else if( indexI == 1 && indexJ == 0)
+                                box4.innerHTML=text2;
+                            else if( indexI == 1 && indexJ == 1)
+                                box5.innerHTML=text2;
+                            else if( indexI == 1 && indexJ == 2)
+                                box6.innerHTML=text2;
+                            else if( indexI == 2 && indexJ == 0)
+                                box7.innerHTML=text2;
+                            else if( indexI == 2 && indexJ == 1)
+                                box8.innerHTML=text2;
+                            else if( indexI == 2 && indexJ == 2)
+                                box9.innerHTML=text2;
+                        }
+                    }
+                },500);     
+            }
+            setTimeout("winnerChecking()", 1000);
+        }
+        
+        let i = 0, j = 0;
+        let winnerChecking = () => {    
+            let d1=0,d2=0,r1=0,r2=0,r3=0,c1=0,c2=0,c3=0;
+            for(i=0;i<=2;i++){
+                for(j=0;j<=2;j++){
+                    if( i == j)
+                        d1 += arr[i][j];
+                    if( i+j == 2)
+                        d2 += arr[i][j];
+                    if( i==0)
+                        r1 += arr[i][j];
+                    if( i==1)
+                        r2 += arr[i][j];
+                    if( i==2)
+                        r3 += arr[i][j];
+                    if( j==0)
+                        c1 += arr[i][j];
+                    if( j==1)
+                        c2 += arr[i][j];
+                    if( j==2)
+                        c3 += arr[i][j];
+                }
+            }    
+        //============= diagonal 1 =========
+            if(d1 == 3){
+                winner.innerHTML = winnerX;
+                dai1.style.display="block";
+                caller();
+                return;
+            }else if(d1 == 15){
+                winner.innerHTML = winnerY;
+                dai1.style.display="block";
+                caller();
+                return;
+            }
+        //============ diagonal 2 ==========
+            if(d2 == 3){
+                winner.innerHTML = winnerX;
+                dai2.style.display="block";
+                caller();
+                return;
+            }else if(d2 == 15){
+                winner.innerHTML = winnerY;
+                dai2.style.display="block";
+                caller();
+                return;
+            }
+        //============ row 1 ===========
+            if(r1 == 3){
+                winner.innerHTML = winnerX;
+                row1.style.display="block";
+                caller();
+                return;
+            }else if(r1 == 15){
+                winner.innerHTML = winnerY;
+                row1.style.display="block";
+                caller();
+                return;
+            }
+        //============ row 2 =========
+            if(r2 == 3){
+                winner.innerHTML = winnerX;
+                row2.style.display="block";
+                caller();
+                return;
+            }else if(r2 == 15){
+                winner.innerHTML = winnerY;
+                row2.style.display="block";
+                caller();
+                return;
+            }
+        //============= row 3 ==========
+            if(r3 == 3){
+                winner.innerHTML = winnerX;
+                row3.style.display="block";
+                caller();
+                return;
+            }else if(r3 == 15){
+                winner.innerHTML = winnerY;
+                row3.style.display="block";
+                caller();
+                return;
+            }
+        //============= column 1 ===========
+            if(c1 == 3){
+                winner.innerHTML = winnerX;
+                col1.style.display="block";
+                caller();
+                return;
+            }else if(c1 == 15){
+                winner.innerHTML = winnerY;
+                col1.style.display="block";
+                caller();
+                return;
+            }
+        //============= column 2 ===========
+            if(c2 == 3){
+                winner.innerHTML = winnerX;
+                col2.style.display="block";
+                caller();
+                return;
+            }else if(c2 == 15){
+                winner.innerHTML = winnerY;
+                col2.style.display="block";
+                caller();
+                return;
+            }
+        //============= column 3 ===========
+            if(c3 == 3){
+                winner.innerHTML = winnerX;
+                col3.style.display="block";
+                caller();
+                return;
+            }else if(c3 == 15){
+                winner.innerHTML = winnerY;
+                col3.style.display="block";
+                caller();
+                return;
+            }
+            if(count == 9){
+                winner.innerHTML = winnerNo;
+                caller();
+            }     
+        // console.log(arr[0]);
+        // console.log(arr[1]);
+        // console.log(arr[2]);  
+        // console.log(count);   
+        }
+        const caller =()=> setTimeout("winnerCall()",1000);
+        function winnerCall(){    
+            result.classList.toggle('result1');
+        }
+        box1.addEventListener("click", clicked);
+        box2.addEventListener("click", clicked);
+        box3.addEventListener("click", clicked);
+        box4.addEventListener("click", clicked);
+        box5.addEventListener("click", clicked);
+        box6.addEventListener("click", clicked);
+        box7.addEventListener("click", clicked);
+        box8.addEventListener("click", clicked);
+        box9.addEventListener("click", clicked);
+        
+        okBtn.addEventListener("click",()=>{
+            window.location.reload();
+        })
+        noBtn.addEventListener("click",()=>{
+            window.close();
+        })
+        
+        
+        
+        </script>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+
+</body></html>
